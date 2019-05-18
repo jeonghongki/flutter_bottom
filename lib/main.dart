@@ -29,7 +29,6 @@ class VerticalDivider extends StatelessWidget {
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -52,125 +51,129 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Widget> get stack {
+    List<Widget> result = [
+      Container(
+          decoration: BoxDecoration(
+              color: Colors.lightBlueAccent
+          )
+      ),
+      Container(
+        margin: EdgeInsets.all(16.0),
+        alignment: Alignment.bottomRight,
+        child: FloatingActionButton(
+            onPressed: () => {
+            _settingModalBottomSheet(context)
+            },
+            child: Icon(Icons.add)
+        ),
+      ),
+    ];
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       drawer: Drawer(
-        child: Container(
-          width: 256,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.only(
-                bottomRight: const Radius.circular(16.0),
-                topRight: const Radius.circular(16.0)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              // 사용자 닉네임
-              Container(
-                padding: const EdgeInsets.only(top: 104.0, left: 24.0, right: 16.0),
-                decoration: BoxDecoration(
+          child: Container(
+            width: 256,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.only(
+                  bottomRight: const Radius.circular(16.0),
+                  topRight: const Radius.circular(16.0)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                // 사용자 닉네임
+                Container(
+                  padding: const EdgeInsets.only(top: 104.0, left: 24.0, right: 16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.only(
+                        topRight: const Radius.circular(16.0)
+                    ),
+                  ),
+                  width: 256,
+                  child: Text(
+                    'Nickname',
+                    style: TextStyle(fontSize: 25.0),
+                  ),
+                ),
+                // 사용자 집주소
+                Container(
+                  padding: const EdgeInsets.only(
+                    top: 8.0, bottom: 16.0,
+                    left: 24.0, right: 16.0,
+                  ),
+                  width: 256,
                   color: Colors.amber,
-                  borderRadius: BorderRadius.only(
-                      topRight: const Radius.circular(16.0)
+                  child: Text(
+                    'address',
+                    style: TextStyle(fontSize: 15.0),
                   ),
                 ),
-                width: 256,
-                child: Text(
-                  'Nickname',
-                  style: TextStyle(fontSize: 25.0),
-                ),
-              ),
-              // 사용자 집주소
-              Container(
-                padding: const EdgeInsets.only(
-                  top: 8.0, bottom: 16.0,
-                  left: 24.0, right: 16.0,
-                ),
-                width: 256,
-                color: Colors.amber,
-                child: Text(
-                  'address',
-                  style: TextStyle(fontSize: 15.0),
-                ),
-              ),
-              // 내가 도전한 퀘스트
-              Container(
-                padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                child: RaisedButton(
-                  elevation: 0.0,
-                  highlightElevation: 0.0,
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.amberAccent.withOpacity(0.5),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: Icon(Icons.local_airport),
-                      ),
-                      Text('내가 수행한 퀘스트')
-                    ],
-                  ),
-                  onPressed: () => {
+                // 내가 도전한 퀘스트
+                Container(
+                  padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                  child: RaisedButton(
+                    elevation: 0.0,
+                    highlightElevation: 0.0,
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.amberAccent.withOpacity(0.5),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Icon(Icons.local_airport),
+                        ),
+                        Text('내가 수행한 퀘스트')
+                      ],
+                    ),
+                    onPressed: () => {
                     Navigator.pop(context)
-                  },
-                  color: Colors.transparent,
-                ),
-              ),
-              // 환경설정
-              Container(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                child: RaisedButton(
-                  elevation: 0.0,
-                  highlightElevation: 0.0,
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.amberAccent.withOpacity(0.5),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: Icon(Icons.settings),
-                      ),
-                      Text('환경설정')
-                    ],
+                    },
+                    color: Colors.transparent,
                   ),
-                  onPressed: () => {
-                    Navigator.pop(context)
-                  },
-                  color: Colors.transparent,
                 ),
-              ),
-            ],
-          ),
-        )
+                // 환경설정
+                Container(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: RaisedButton(
+                    elevation: 0.0,
+                    highlightElevation: 0.0,
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.amberAccent.withOpacity(0.5),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Icon(Icons.settings),
+                        ),
+                        Text('환경설정')
+                      ],
+                    ),
+                    onPressed: () => {
+                    Navigator.pop(context)
+                    },
+                    color: Colors.transparent,
+                  ),
+                ),
+              ],
+            ),
+          )
       ),
       body: WillPopScope(
           onWillPop: _yon,
           child: Stack(
-            children: <Widget>[
-              Container(
-                  decoration: BoxDecoration(
-                      color: Colors.lightBlueAccent
-                  )
-              ),
-              Container(
-                margin: EdgeInsets.all(16.0),
-                alignment: Alignment.bottomRight,
-                child: FloatingActionButton(
-                    onPressed: () => {
-                      _settingModalBottomSheet(context)
-                    },
-                    child: Icon(Icons.add)
-                ),
-              ),
-            ],
+            children: stack,
           )
       ),
     );
